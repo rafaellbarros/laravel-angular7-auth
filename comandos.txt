@@ -1,0 +1,14 @@
+// Instalando dependências
+composer require pagseguro/php:2.7.1
+
+composer require tymon/jwt-auth:dev-develop
+
+// Publicando o provider
+php artisan vendor:publish --provider="Tymon\JWTAuth\Provivers\LaravelServiceProvider"
+php artisan vendor:publish --provider="Barryvdh\Cors\ServiceProvider"
+
+// gerando keyboard
+php artisan jwt
+
+// instalando biblioteca que vai habilitar o cors da aplicaçao
+composer require barryvdh/laravel-cors
