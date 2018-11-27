@@ -12,3 +12,15 @@ php artisan jwt
 
 // instalando biblioteca que vai habilitar o cors da aplicaçao
 composer require barryvdh/laravel-cors
+
+// criando migracao de produtos
+php artisan make:migration create_products_table --create=products
+
+// autoload do seed
+composer dumpautoload
+
+// realizando a migração e rodando o seed
+php artisan migrate --seed
+
+// reexecutando a migração
+php artisan migrate:refresh --seed
