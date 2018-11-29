@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { LocalStorageService } from '../services/local-storage.service';
 import { JwtTokenService } from '../services/jwt-token.service';
 import { map } from 'rxjs/operators';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'login',
@@ -17,23 +18,16 @@ export class LoginComponent implements OnInit {
     password: ''
   };
 
-  constructor(private http: HttpClient, private jwtTokenService: JwtTokenService) { }
+  constructor(private loginService: LoginService) { }
 
   ngOnInit() {
   }
 
   public login() {
-
-  this.serviceLogin()
-          .subscribe(response => {
-            this.jwtTokenService.token = response.token;
-            console.warn(response);
-          }, error => {
-            console.error(error);
-        });
+    this.loginService.login(this.user).subscribe(resp => {
+      console.log(resp);
+    }, error => {
+      console.error(error);
+    });
   }
-
-  private serviceLogin = () =>
-      this.http.post('http://localhost:8000/api/login', this.user)
-
 }
