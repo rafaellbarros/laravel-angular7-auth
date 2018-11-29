@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { LocalStorageService } from '../services/local-storage.service';
+import { JwtTokenService } from '../services/jwt-token.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'login',
@@ -15,23 +17,7 @@ export class LoginComponent implements OnInit {
     password: ''
   };
 
-  constructor(private http: HttpClient, private localStorageService: LocalStorageService) {
-    this.localStorageService.set('nome', 'rafael')
-          .set('curso','angular 7');
-
-          console.log(this.localStorageService.get('nome'));
-          console.log(this.localStorageService.get('curso'));
-          console.log(this.localStorageService.get('nada'));
-
-          this.localStorageService.setObject('object', {
-            'nome': 'Rafael Barros'
-          });
-
-          console.log(this.localStorageService.getObject('object'));
-
-          console.log(this.localStorageService.getObject['object1']);
-          this.localStorageService.remove('nome').remove('curso').remove('object');
-  }
+  constructor(private http: HttpClient, private jwtTokenService: JwtTokenService) { }
 
   ngOnInit() {
   }
@@ -40,6 +26,7 @@ export class LoginComponent implements OnInit {
 
   this.serviceLogin()
           .subscribe(response => {
+            this.jwtTokenService.token = response.token;
             console.warn(response);
           }, error => {
             console.error(error);
@@ -47,6 +34,6 @@ export class LoginComponent implements OnInit {
   }
 
   private serviceLogin = () =>
-      this.http.post('http://localhost:8000/api/login', this.user, {observe: 'response'});
+      this.http.post('http://localhost:8000/api/login', this.user)
 
 }
