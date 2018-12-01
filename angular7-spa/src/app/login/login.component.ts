@@ -5,6 +5,7 @@ import { LocalStorageService } from '../services/local-storage.service';
 import { JwtTokenService } from '../services/jwt-token.service';
 import { map } from 'rxjs/operators';
 import { LoginService } from '../services/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'login',
@@ -18,7 +19,9 @@ export class LoginComponent implements OnInit {
     password: ''
   };
 
-  constructor(private loginService: LoginService) { }
+  redirectAfterLogin = ['/products/list'];
+
+  constructor(private loginService: LoginService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -26,6 +29,7 @@ export class LoginComponent implements OnInit {
   public login() {
     this.loginService.login(this.user).subscribe(resp => {
       console.log(resp);
+      this.router.navigate(this.redirectAfterLogin);
     }, error => {
       console.error(error);
     });
