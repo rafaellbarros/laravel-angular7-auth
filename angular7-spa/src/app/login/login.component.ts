@@ -6,6 +6,7 @@ import { JwtTokenService } from '../services/jwt-token.service';
 import { map } from 'rxjs/operators';
 import { LoginService } from '../services/login.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'login',
@@ -21,7 +22,9 @@ export class LoginComponent implements OnInit {
 
   redirectAfterLogin = ['/products/list'];
 
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(
+      private loginService: LoginService,
+      private router: Router) { }
 
   ngOnInit() {
   }
