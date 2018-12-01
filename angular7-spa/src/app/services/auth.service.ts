@@ -11,4 +11,9 @@ export class AuthService {
   constructor(private jwtTokenService: JwtTokenService) {
     this.check = this.jwtTokenService.token ? true : false;
   }
+
+  logout() {
+    this.jwtTokenService.token = null;
+    this.check = false;
+  }
 }
