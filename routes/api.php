@@ -22,6 +22,12 @@ Route::group(['middleware' => 'cors'], function () {
         Route::get('products', 'Api\ProductsController@index');
         Route::get('session', 'Api\PagSeguroController@getSessionId');
         Route::get('order', 'Api\OrdersController@store');
+        Route::get('user', function() {
+            $user = JWTAuth::parseToken()->toUser();
+
+            return response()->json(compact('user'));
+        });
     });
+
     Route::post('login', 'Api\AuthController@login');
 });

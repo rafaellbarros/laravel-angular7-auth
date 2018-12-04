@@ -6,11 +6,10 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css']
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent implements OnInit, AfterViewChecked {
 
   constructor(public auth: AuthService) { }
 
   ngOnInit() {
   }
-
 }

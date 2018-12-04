@@ -8,6 +8,11 @@ import { LoginService } from '../services/login.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
+export class User {
+  email: string;
+  password: string;
+}
+
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
@@ -15,10 +20,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  user = {
-    email: '',
-    password: ''
-  };
+  user = new User();
 
   redirectAfterLogin = ['/products/list'];
 
@@ -30,7 +32,7 @@ export class LoginComponent implements OnInit {
   }
 
   public login() {
-    this.loginService.login(this.user).subscribe(resp => {
+    this.loginService.getLogin(this.user).subscribe(resp => {
       console.log(resp);
       this.router.navigate(this.redirectAfterLogin);
     }, error => {

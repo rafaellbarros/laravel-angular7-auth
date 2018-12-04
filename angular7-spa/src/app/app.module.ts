@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { MenuComponent } from './menu/menu.component';
 import { LogoutComponent } from './logout/logout.component';
+import { httpInterceptorProviders } from './http-interceptors';
 
 
 @NgModule({
@@ -31,7 +32,7 @@ import { LogoutComponent } from './logout/logout.component';
     AppRoutingModule,
 
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
