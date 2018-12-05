@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,4 +31,12 @@ Route::group(['middleware' => 'cors'], function () {
     });
 
     Route::post('login', 'Api\AuthController@login');
+    Route::post('refresh_token', function(){
+        try {
+            $token = JWTAuth::parseToken()->refresh();
+            return response()->json(compact('token'));
+        }catch (JWTException $exception){
+            return response()->json(['error' => 'token_invalid'],400);
+        }
+    });
 });
